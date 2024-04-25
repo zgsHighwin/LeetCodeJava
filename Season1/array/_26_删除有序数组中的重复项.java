@@ -44,11 +44,60 @@ package array;
  */
 public class _26_删除有序数组中的重复项 {
     public static void main(String[] args) {
+        System.out.println(new _26_删除有序数组中的重复项().removeDuplicates(new int[]{
+                0, 0, 1, 1, 1, 2, 2, 3, 3, 4
 
+        }));
+
+        System.out.println(new _26_删除有序数组中的重复项().removeDuplicates(new int[]{
+                1, 1, 2
+
+        }));
     }
 
+    /**
+     * 只操控数组需要实现
+     *
+     * @param nums
+     * @return
+     */
     public int removeDuplicates(int[] nums) {
+        int curIndex = 0;
+        // 111 2222 33333
+        for (int i = 1; i < nums.length; i++) {
+            if (nums[curIndex] == nums[i]) {
+                continue;
+            } else {
+                nums[++curIndex] = nums[i];
+            }
+        }
+        return curIndex + 1;
+    }
 
-        return 0;
+    //这个性能很差
+    public int removeDuplicates1(int[] nums) {
+        //n为k n+1为value
+        int[] record = new int[nums.length * 2];
+        int recordIndex = 0;
+        int cur = nums[0];
+        record[recordIndex] = cur;
+        record[recordIndex + 1] = 1;
+        for (int i = 1; i < nums.length; i++) {
+            if (nums[i] == cur) {
+                ++record[recordIndex + 1];
+            } else {
+                cur = nums[i];
+                recordIndex += 2;
+                record[recordIndex] = cur;
+                record[recordIndex + 1] = 1;
+            }
+        }
+
+        int result = recordIndex / 2 + 1;
+        for (int i = 0; i < result; i++) {
+            nums[i] = record[i * 2];
+        }
+
+        return result;
     }
 }
