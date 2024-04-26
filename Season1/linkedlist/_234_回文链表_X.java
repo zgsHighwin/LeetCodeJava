@@ -27,7 +27,7 @@ package linkedlist;
  * <p>
  * 进阶：你能否用 O(n) 时间复杂度和 O(1) 空间复杂度解决此题？
  */
-public class _234_回文链表 {
+public class _234_回文链表_X {
 
     public boolean isPalindrome(ListNode head) {
 
